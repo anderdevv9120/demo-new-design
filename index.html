@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="vi" data-theme="a">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Son Lụa — Home mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap">
+<style>
+/* ===== Directions: chỉ đổi token — map 1:1 sang src/themes/<name>/tokens.css ===== */
+:root, [data-theme="a"] { /* A · Son — bám sát reference: kem + đỏ son, chữ hoa lớn, góc vuông */
+  --page:#FFFBF8; --band:#EDE6DB; --tint:#FBEDEC; --soft:#F8F4ED;
+  --ink:#302621; --muted:#615952; --line:#E6DED4;
+  --accent:#BC0000; --accent-deep:#8A0000; --bar:#8A0000; --gold:#FFD359; --footer:#151515;
+  --display:'Plus Jakarta Sans',system-ui,sans-serif; --script:'Playfair Display',Georgia,serif;
+  --h-weight:400; --h-transform:uppercase; --h-track:-.01em;
+  --radius:0px; --badge-radius:4px; --btn-radius:0px;
+}
+[data-theme="b"] { /* B · Lụa — giữ bố cục reference, chữ serif mềm, đỏ rượu + vàng nhạt, nút bo tròn */
+  --page:#F8F4ED; --band:#EFE6D8; --tint:#F3E6DF; --soft:#FBF8F2;
+  --ink:#2E1F1A; --muted:#6B5D54; --line:#E3D8C8;
+  --accent:#9E2032; --accent-deep:#5A1A2A; --bar:#5A1A2A; --gold:#E8C27A; --footer:#2E1F1A;
+  --display:'Playfair Display',Georgia,serif; --script:'Playfair Display',Georgia,serif;
+  --h-weight:400; --h-transform:none; --h-track:-.015em;
+  --radius:4px; --badge-radius:999px; --btn-radius:999px;
+}
+[data-theme="c"] { /* C · Mực — thương mại mạnh: trắng/đen, đỏ chỉ cho giá & sale, chữ đậm */
+  --page:#FFFFFF; --band:#F2F2F2; --tint:#F4F4F4; --soft:#F7F7F7;
+  --ink:#151515; --muted:#5C5C5C; --line:#E5E5E5;
+  --accent:#C8102E; --accent-deep:#151515; --bar:#151515; --gold:#FFD359; --footer:#151515;
+  --display:'Plus Jakarta Sans',system-ui,sans-serif; --script:'Plus Jakarta Sans',system-ui,sans-serif;
+  --h-weight:700; --h-transform:uppercase; --h-track:-.035em;
+  --radius:0px; --badge-radius:0px; --btn-radius:0px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.6 'Plus Jakarta Sans',system-ui,sans-serif;transition:background .25s,color .25s}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(16px,3vw,40px)}
+section{padding:clamp(56px,7vw,104px) 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---- Buttons ---- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border:1.5px solid currentColor;border-radius:var(--btn-radius);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:none;transition:background .2s,color .2s}
+.btn-accent{color:var(--accent)}
+.btn-accent:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-solid{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-solid:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.btn-light{color:#fff}
+.btn-light:hover{background:#fff;color:var(--ink)}
+
+/* ---- Flash bar ---- */
+.flash{background:var(--bar);color:#fff;font-size:14px}
+.flash .wrap{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2.4vw,28px);min-height:48px;flex-wrap:wrap;padding-block:6px}
+.flash-tag{display:flex;align-items:center;gap:6px;color:var(--gold);font-weight:700;letter-spacing:.02em}
+.flash-sep{width:1px;height:22px;background:rgba(255,255,255,.35)}
+.count{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+.count b{color:var(--gold);font-size:17px}
+.count small{font-size:10px;font-weight:700;letter-spacing:.06em}
+.flash .btn{padding:7px 14px;font-size:12px}
+
+/* ---- Header ---- */
+.header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--page) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px}
+.logo{font-weight:600;letter-spacing:.32em;font-size:18px}
+[data-theme="b"] .logo{font-family:var(--script);font-style:italic;letter-spacing:.04em;font-size:26px;font-weight:400}
+[data-theme="c"] .logo{font-weight:800;letter-spacing:-.02em;font-size:22px}
+.nav{display:flex;gap:clamp(20px,2.6vw,44px);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.nav a{position:relative;padding:6px 0}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--accent);transform:scaleX(0);transition:transform .2s}
+.nav a:hover::after{transform:scaleX(1)}
+.icons{display:flex;justify-content:flex-end;gap:18px}
+.icons a{position:relative;display:grid;place-items:center;width:28px;height:28px}
+.icons svg{width:22px;height:22px}
+.cart-count{position:absolute;top:-4px;right:-6px;min-width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center}
+.burger{display:none;background:none;border:0;padding:0;width:28px}
+
+/* ---- Hero ---- */
+.hero{position:relative;height:min(86vh,820px);min-height:520px;overflow:hidden;color:#fff;padding:0}
+.hero-imgs{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.hero-imgs img{object-position:center 25%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.28) 50%,rgba(0,0,0,.5))}
+.hero-copy{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+.hero-eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600}
+.hero h2{margin:14px 0 10px;font:400 clamp(48px,7vw,104px)/1.05 var(--display);letter-spacing:-.02em}
+[data-theme="b"] .hero h2{font-style:italic}
+.hero p{margin:0 0 28px;font-size:16px;opacity:.9}
+[data-theme="c"] .hero-copy{align-items:flex-start;justify-content:flex-end;text-align:left;padding:clamp(24px,5vw,72px)}
+[data-theme="c"] .hero h2{font-weight:800;text-transform:uppercase;letter-spacing:-.045em;font-size:clamp(56px,9vw,140px);line-height:.95}
+.dots{position:absolute;z-index:1;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.dots i{width:28px;height:2px;background:rgba(255,255,255,.45)}
+.dots i:first-child{background:#fff}
+[data-theme="c"] .dots{left:auto;right:clamp(24px,5vw,72px);transform:none}
+
+/* ---- USP ---- */
+.usp{padding:28px 0;border-bottom:1px solid var(--line)}
+.usp .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.usp-item{display:flex;gap:14px;align-items:center}
+.usp-item svg{flex:none;width:38px;height:38px;stroke:var(--ink);stroke-width:1.3;fill:none}
+.usp-item b{display:block;font-size:15px;font-weight:600}
+.usp-item span{font-size:13px;color:var(--muted)}
+
+/* ---- Section heads ---- */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(28px,3.5vw,48px)}
+.head h2{margin:0;max-width:13ch;font:var(--h-weight) clamp(34px,4.6vw,66px)/1.12 var(--display);text-transform:var(--h-transform);letter-spacing:var(--h-track)}
+.head p{margin:0;max-width:340px;color:var(--muted)}
+.head .arrows{display:flex;gap:8px}
+.arrows button{width:44px;height:44px;border:1px solid var(--line);border-radius:var(--btn-radius);background:var(--page);display:grid;place-items:center}
+.arrows button:hover{border-color:var(--ink)}
+.center-head{text-align:center;max-width:720px;margin:0 auto clamp(32px,4vw,56px)}
+.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.center-head h2{margin:10px 0 12px;font:400 clamp(30px,3.6vw,48px)/1.15 var(--display);letter-spacing:-.015em}
+[data-theme="c"] .center-head h2{font-weight:700;text-transform:uppercase;letter-spacing:-.03em}
+.center-head p{margin:0;color:var(--muted)}
+
+/* ---- Category tiles (beige band) ---- */
+.band{background:var(--band)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tile{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:var(--radius);color:#fff}
+.tile img{transition:transform .6s}
+.tile:hover img{transform:scale(1.04)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55))}
+.tile-cap{position:absolute;z-index:1;left:22px;right:22px;bottom:20px;display:flex;justify-content:space-between;align-items:flex-end}
+.tile-cap b{font:500 clamp(20px,1.8vw,26px)/1.2 var(--display)}
+[data-theme="c"] .tile-cap b{font-weight:700;text-transform:uppercase;letter-spacing:-.02em}
+.tile-cap span{font-size:12px;opacity:.85}
+
+/* ---- Product card ---- */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.8vw,24px)}
+.card{position:relative;display:block}
+.card-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--soft);border-radius:var(--radius)}
+.card-media img{transition:transform .6s}
+.card:hover .card-media img{transform:scale(1.04)}
+.badge{position:absolute;z-index:1;top:12px;left:12px;padding:4px 9px;background:var(--accent);color:#fff;font-size:12px;font-weight:600;border-radius:var(--badge-radius)}
+.rank{position:absolute;z-index:1;top:12px;left:12px;min-width:38px;padding:6px 8px;text-align:center;background:var(--page);color:var(--ink);font:600 15px/1 var(--display);border-radius:var(--badge-radius)}
+.quick{position:absolute;z-index:1;left:12px;right:12px;bottom:12px;padding:11px;background:var(--page);color:var(--ink);border:0;border-radius:var(--btn-radius);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.25s}
+.card:hover .quick{opacity:1;transform:none}
+.card h3{margin:14px 0 6px;font-size:15px;font-weight:500;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.swatches{display:flex;gap:6px;margin-bottom:8px}
+.swatches i{width:12px;height:12px;border-radius:50%;outline:1px solid var(--line);outline-offset:2px}
+.price{display:flex;gap:10px;align-items:baseline}
+.price b{color:var(--accent);font-size:16px;font-weight:700}
+.price s{color:var(--muted);font-size:13px}
+.more{display:flex;justify-content:center;margin-top:clamp(32px,4vw,48px)}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 4 * 24px) / 5);gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail .card{scroll-snap-align:start}
+
+/* ---- Combo split ---- */
+.split{display:grid;grid-template-columns:1fr 1fr;border-top:3px solid var(--accent);margin-bottom:clamp(40px,5vw,72px)}
+.split:last-child{margin-bottom:0}
+.split.rev .split-hero{order:2}
+.split-hero{position:relative;min-height:520px;color:#fff;border-radius:0 0 0 var(--radius);overflow:hidden}
+.split-hero img{position:absolute;inset:0}
+.split-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.05) 30%,rgba(0,0,0,.55))}
+.split.rev .split-hero::after{background:linear-gradient(270deg,rgba(0,0,0,.05) 30%,rgba(0,0,0,.55))}
+.split-copy{position:absolute;z-index:1;top:50%;right:8%;transform:translateY(-50%);max-width:300px;text-align:center}
+.split.rev .split-copy{right:auto;left:8%}
+.split-copy small{font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+.split-copy .script{display:block;margin:10px 0 16px;font:italic 400 clamp(36px,3.6vw,52px)/1.05 var(--script)}
+[data-theme="c"] .split-copy .script{font-style:normal;font-weight:800;text-transform:uppercase;letter-spacing:-.04em}
+.split-copy p{margin:0 0 20px;font-size:14px;opacity:.92}
+.split-body{background:var(--tint);padding:clamp(20px,2vw,28px);display:flex;flex-direction:column;gap:24px}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.strip img{aspect-ratio:3/4;border-radius:var(--radius)}
+.split-info{display:grid;grid-template-columns:auto 1fr;gap:6px 24px;align-items:start}
+.split-info h3{margin:0;color:var(--accent);font:400 clamp(30px,2.6vw,40px)/1.1 var(--display)}
+[data-theme="c"] .split-info h3{font-weight:800;text-transform:uppercase;letter-spacing:-.03em}
+.split-info p{margin:0;color:var(--muted)}
+.split-info .combo-price{grid-column:2;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.combo-price b{color:var(--accent);font-size:18px}
+.combo-price em{font-style:normal;font-size:12px;font-weight:700;color:var(--accent-deep);background:color-mix(in srgb,var(--accent) 12%,transparent);padding:2px 8px;border-radius:var(--badge-radius)}
+.split-info .btn{grid-column:2;justify-self:start;margin-top:10px}
+
+/* ---- Lookbook / promo mosaic ---- */
+.mosaic{display:grid;grid-template-columns:1.05fr 1fr;gap:16px}
+.mosaic-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mos{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:1/1}
+.mos-big{aspect-ratio:auto;min-height:100%}
+.mos-big img{position:absolute;inset:0}
+.mos-big::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(248,244,237,.92) 0%,rgba(248,244,237,.65) 45%,transparent 75%)}
+[data-theme="c"] .mos-big::after{background:linear-gradient(90deg,rgba(0,0,0,.6),transparent 75%)}
+.poster{position:absolute;z-index:1;left:clamp(24px,5vw,72px);top:50%;transform:translateY(-50%);color:var(--ink);max-width:60%}
+[data-theme="c"] .poster{color:#fff}
+.poster h3{margin:0;font:400 clamp(48px,6vw,92px)/1 var(--script);letter-spacing:-.02em}
+.poster h3 span{display:block;padding-left:1.4em}
+[data-theme="c"] .poster h3{font-weight:800;text-transform:uppercase;letter-spacing:-.05em}
+.orn{display:flex;align-items:center;gap:12px;margin:24px 0 18px;color:var(--accent)}
+.orn::before,.orn::after{content:"";flex:1;height:1px;background:currentColor;opacity:.5}
+.poster p{margin:0 0 22px;font:italic 400 22px/1.3 var(--script)}
+[data-theme="c"] .poster p{font-style:normal;font-size:18px;font-weight:600}
+.mos-label{position:absolute;z-index:1;left:14px;bottom:14px;padding:6px 12px;background:var(--page);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:var(--badge-radius)}
+
+/* ---- Brand story (guide rows) ---- */
+.story-row{display:grid;grid-template-columns:1fr 1fr;background:var(--page);border-top:3px solid var(--accent)}
+.story-row+.story-row{margin-top:24px}
+.story-row.rev .story-media{order:2}
+.story-media{aspect-ratio:16/10}
+.story-text{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:center}
+.story-text h3{margin:6px 0 14px;font:400 clamp(26px,2.6vw,38px)/1.2 var(--display)}
+[data-theme="c"] .story-text h3{font-weight:700;letter-spacing:-.02em}
+.story-text p{margin:0 0 20px;color:var(--muted);max-width:52ch}
+.story-text .eyebrow{letter-spacing:.04em;text-transform:none;font-weight:600}
+.stats{display:flex;gap:36px;margin-top:4px}
+.stats b{display:block;font:500 30px/1 var(--display);color:var(--accent)}
+.stats span{font-size:12px;color:var(--muted)}
+
+/* ---- Reviews ---- */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{background:var(--page);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:16px}
+.stars{color:var(--gold);letter-spacing:2px;font-size:16px}
+[data-theme="a"] .stars,[data-theme="c"] .stars{color:#E8A300}
+.review q{font:400 17px/1.55 var(--display);quotes:none}
+[data-theme="a"] .review q,[data-theme="c"] .review q{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px}
+.review footer{margin-top:auto;display:flex;gap:12px;align-items:center;font-size:13px}
+.review footer img{width:44px;height:56px;border-radius:var(--radius)}
+.review footer b{display:block;font-size:14px}
+.review footer span{color:var(--muted)}
+.verified{color:#108B67;font-weight:600}
+
+/* ---- Instagram ---- */
+.ig{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:36px}
+.ig a{aspect-ratio:1/1;overflow:hidden;border-radius:var(--radius)}
+.ig img{transition:transform .5s,filter .3s}
+.ig a:hover img{transform:scale(1.05);filter:brightness(.85)}
+
+/* ---- Footer ---- */
+.footer{background:var(--footer);color:#E9E4DE;padding:64px 0 24px}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
+.footer .logo{color:#fff}
+.footer h4{margin:0 0 16px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:14px;color:#BDB5AD}
+.footer p{color:#BDB5AD;font-size:14px}
+.sub-form{display:flex;margin-top:8px}
+.sub-form input{flex:1;min-width:0;padding:13px 14px;border:1px solid rgba(255,255,255,.25);border-right:0;background:transparent;color:#fff;font:inherit;border-radius:var(--btn-radius) 0 0 var(--btn-radius)}
+.sub-form button{padding:0 22px;border:0;background:var(--accent);color:#fff;font-weight:600;border-radius:0 var(--btn-radius) var(--btn-radius) 0}
+.footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:20px;font-size:12px;color:#8F8780}
+
+/* ---- Direction switcher (chỉ trong mockup) ---- */
+.switch{position:fixed;z-index:50;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:4px;padding:5px;background:#151515;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.switch button{display:flex;align-items:center;gap:8px;padding:8px 14px;border:0;border-radius:999px;background:none;color:#fff;font-size:13px;font-weight:600;white-space:nowrap}
+.switch button[aria-pressed="true"]{background:#fff;color:#151515}
+.switch i{width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.4)}
+.switch button[aria-pressed="true"] i{box-shadow:0 0 0 1px #999}
+
+/* ---- Responsive ---- */
+@media (max-width:1100px){
+  .nav{display:none}
+  .burger{display:block}
+  .header .wrap{grid-template-columns:auto 1fr auto;gap:16px}
+  .header .logo{justify-self:center;grid-column:2}
+  .usp .wrap{grid-template-columns:repeat(2,1fr)}
+  .rail{grid-auto-columns:calc((100% - 2 * 16px) / 3);gap:16px}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .hero-imgs{grid-template-columns:1fr}
+  .hero-imgs img:not(:nth-child(2)){display:none}
+  .tiles{grid-template-columns:repeat(4,72%);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:calc(-1 * clamp(16px,3vw,40px))}
+  .tile{scroll-snap-align:start}
+  .head{flex-direction:column;align-items:flex-start;gap:12px}
+  .split,.story-row,.mosaic{grid-template-columns:1fr}
+  .split.rev .split-hero,.story-row.rev .story-media{order:0}
+  .split-hero{min-height:440px}
+  .mos-big{min-height:420px}
+  .reviews{grid-template-columns:1fr}
+  .ig{grid-template-columns:repeat(3,1fr)}
+  .rail{grid-auto-columns:46%}
+}
+@media (max-width:560px){
+  .flash-sep,.flash-note{display:none}
+  .flash .btn span{display:none}
+  .usp .wrap{gap:18px 12px}
+  .usp-item svg{width:30px;height:30px}
+  .usp-item b{font-size:13px}
+  .usp-item span{font-size:12px}
+  .split-info{grid-template-columns:1fr}
+  .split-info .combo-price,.split-info .btn{grid-column:1}
+  .footer-top{grid-template-columns:1fr}
+  .switch button span{display:none}
+  .switch button{padding:8px 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- Flash sale bar (reference) — cần nguồn data: chiến dịch flash sale có endsAt -->
+<div class="flash">
+  <div class="wrap">
+    <span class="flash-tag">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+      FLASH SALE
+    </span>
+    <span class="flash-sep" aria-hidden="true"></span>
+    <span class="flash-note">Ưu đãi có hạn</span>
+    <span class="count" aria-label="Thời gian còn lại">
+      <b data-h>12</b><small>GIỜ</small>:<b data-m>22</b><small>PHÚT</small>:<b data-s>08</b><small>GIÂY</small>
+    </span>
+    <a class="btn btn-light" href="#sale"><span>Khám phá ngay</span> →</a>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap">
+    <button class="burger" aria-label="Mở menu">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+    <a class="logo" href="#">CLOTHES</a>
+    <nav class="nav" aria-label="Chính">
+      <a href="#sale">Sản phẩm</a>
+      <a href="#cat">Bộ sưu tập ▾</a>
+      <a href="#combo">Combo</a>
+      <a href="#">Chính sách đổi trả</a>
+      <a href="#">Liên hệ</a>
+    </nav>
+    <div class="icons">
+      <a href="#" aria-label="Tài khoản"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a>
+      <a href="#" aria-label="Tìm kiếm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+      <a href="#" aria-label="Giỏ hàng, 2 sản phẩm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-count">2</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<h1 class="sr">CLOTHES — Thời trang tối giản, mặc bền nhiều mùa</h1>
+
+<!-- theme.Hero -->
+<section class="hero">
+  <div class="hero-imgs">
+    <img src="https://images.unsplash.com/photo-1676716105765-e19fe6a01851?w=900&q=80&auto=format&fit=crop" alt="Người mẫu mặc trench coat trên phố">
+    <img src="https://images.unsplash.com/photo-1678700266327-8959be9622fd?w=900&q=80&auto=format&fit=crop" alt="Người mẫu mặc áo khoác camel và kính râm">
+    <img src="https://images.unsplash.com/photo-1618333453296-9e35280fd6b1?w=900&q=80&auto=format&fit=crop" alt="Người mẫu mặc áo khoác nâu trên vỉa hè">
+  </div>
+  <div class="hero-copy">
+    <span class="hero-eyebrow">Bộ sưu tập Thu Đông 2026</span>
+    <h2>Modernos</h2>
+    <p>Ready-to-wear · phom chuẩn, mặc bền nhiều mùa</p>
+    <a class="btn btn-light" href="#sale">Khám phá ngay →</a>
+  </div>
+  <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+</section>
+
+<!-- UspStrip — dời lên ngay dưới hero như reference -->
+<div class="usp">
+  <div class="wrap">
+    <div class="usp-item"><svg viewBox="0 0 40 40"><path d="M3 10h21v17H3zM24 16h7l6 6v5H24z"/><circle cx="10" cy="29" r="3"/><circle cx="30" cy="29" r="3"/></svg><div><b>Miễn phí vận chuyển</b><span>Đơn hàng từ 500k</span></div></div>
+    <div class="usp-item"><svg viewBox="0 0 40 40"><path d="M8 14a13 13 0 1 1-2 9"/><path d="M8 6v8h8"/><path d="M14 18l6-3 6 3v7l-6 3-6-3z"/></svg><div><b>Đổi trả dễ dàng</b><span>Trong vòng 30 ngày</span></div></div>
+    <div class="usp-item"><svg viewBox="0 0 40 40"><path d="M9 22v-4a11 11 0 0 1 22 0v4"/><rect x="6" y="21" width="6" height="9" rx="2"/><rect x="28" y="21" width="6" height="9" rx="2"/><path d="M31 30c0 4-4 5-9 5"/></svg><div><b>Hỗ trợ 24/7</b><span>Gọi hotline để được tư vấn</span></div></div>
+    <div class="usp-item"><svg viewBox="0 0 40 40"><rect x="4" y="9" width="32" height="22" rx="3"/><path d="M4 16h32M9 25h8"/></svg><div><b>Thanh toán đa dạng</b><span>COD, thẻ, ví điện tử</span></div></div>
+  </div>
+</div>
+
+<!-- Category — thẻ ảnh có caption như "Chi tiết tạo nên nét riêng" -->
+<section class="band" id="cat">
+  <div class="wrap">
+    <div class="head">
+      <h2>Chọn theo phong cách</h2>
+      <p>Từ những gam màu dịu nhẹ đến sắc áo nổi bật, tìm thiết kế hợp với phong cách của nàng.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile" href="#"><img src="https://images.unsplash.com/photo-1618037208874-021263b58d69?w=800&q=75&auto=format&fit=crop" alt="Đầm lụa hai dây"><div class="tile-cap"><b>Đầm</b><span>48 mẫu</span></div></a>
+      <a class="tile" href="#"><img src="https://images.unsplash.com/photo-1613915617430-8ab0fd7c6baf?w=800&q=75&auto=format&fit=crop" alt="Blazer và quần ống rộng"><div class="tile-cap"><b>Công sở</b><span>36 mẫu</span></div></a>
+      <a class="tile" href="#"><img src="https://images.unsplash.com/photo-1574201635302-388dd92a4c3f?w=800&q=75&auto=format&fit=crop" alt="Áo len mềm"><div class="tile-cap"><b>Áo len</b><span>22 mẫu</span></div></a>
+      <a class="tile" href="#"><img src="https://images.unsplash.com/photo-1654707636750-ab67a11b21b7?w=800&q=75&auto=format&fit=crop" alt="Túi da"><div class="tile-cap"><b>Phụ kiện</b><span>17 mẫu</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- Đang khuyến mãi — tiêu đề hoa lớn trái, mô tả phải -->
+<section id="sale">
+  <div class="wrap">
+    <div class="head">
+      <h2>Office style — your signature</h2>
+      <p>Đang khuyến mãi: những thiết kế công sở được yêu thích nhất, giá tốt trong tuần này.</p>
+    </div>
+    <div class="grid4" data-cards="sale"></div>
+    <div class="more"><a class="btn btn-accent" href="#">Xem tất cả ưu đãi</a></div>
+  </div>
+</section>
+
+<!-- Combo — khối split như "Duyên / Thanh / Kiều" -->
+<section id="combo" style="padding-top:0">
+  <div class="wrap">
+    <div class="center-head">
+      <span class="eyebrow">Combo phối sẵn – nâng tầm phong cách</span>
+      <h2>Sắc riêng trong từng bộ đồ</h2>
+    </div>
+    <article class="split">
+      <div class="split-hero">
+        <img src="https://images.unsplash.com/photo-1592818628487-b273941a7849?w=1200&q=75&auto=format&fit=crop" alt="Người mẫu mặc áo khoác camel">
+        <div class="split-copy">
+          <small>Thời trang công sở</small>
+          <span class="script">Thanh lịch<br>Chuyên nghiệp</span>
+          <p>“Bộ phối công sở hiện đại, tinh tế giúp nàng tự tin trong mọi khoảnh khắc làm việc.”</p>
+          <a class="btn btn-light" href="#">Khám phá ngay</a>
+        </div>
+      </div>
+      <div class="split-body">
+        <div class="strip">
+          <img src="https://images.unsplash.com/photo-1618333453296-9e35280fd6b1?w=500&q=75&auto=format&fit=crop" alt="Áo khoác camel, mặt sau">
+          <img src="https://images.unsplash.com/photo-1673105793839-6c2811a4e1e7?w=500&q=75&auto=format&fit=crop" alt="Áo khoác camel trên người mẫu">
+          <img src="https://images.unsplash.com/photo-1637102146291-c408b298e22b?w=500&q=75&auto=format&fit=crop" alt="Trench coat dài màu đá">
+        </div>
+        <div class="split-info">
+          <h3>Duyên</h3>
+          <p>Áo khoác camel + sơ mi lụa + quần ống suông. Ba món phối sẵn, mặc được từ văn phòng đến buổi hẹn tối.</p>
+          <div class="combo-price"><b>1.290.000 ₫</b><s style="color:var(--muted);font-size:13px">1.610.000 ₫</s><em>Tiết kiệm 320k</em></div>
+          <a class="btn btn-accent" href="#">Xem combo</a>
+        </div>
+      </div>
+    </article>
+    <article class="split rev">
+      <div class="split-hero">
+        <img src="https://images.unsplash.com/photo-1779406545010-c439e41fded7?w=1200&q=75&auto=format&fit=crop" alt="Hai người mẫu mặc đầm satin hồng cầm hoa">
+        <div class="split-copy">
+          <small>Tiệc &amp; sự kiện</small>
+          <span class="script">Dịu dàng<br>Rạng rỡ</span>
+          <p>“Satin mềm rủ, sắc hồng phấn cho những buổi tối đáng nhớ.”</p>
+          <a class="btn btn-light" href="#">Khám phá ngay</a>
+        </div>
+      </div>
+      <div class="split-body">
+        <div class="strip">
+          <img src="https://images.unsplash.com/photo-1777713272516-e7b2216fe15e?w=500&q=75&auto=format&fit=crop" alt="Đầm lụa cổ đổ trắng">
+          <img src="https://images.unsplash.com/photo-1625158244856-e5e20f733c1f?w=500&q=75&auto=format&fit=crop" alt="Đầm trắng giữa cánh đồng hoa đỏ">
+          <img src="https://images.unsplash.com/photo-1679973506598-5d29b280eef8?w=500&q=75&auto=format&fit=crop" alt="Kẹp tóc hồng trên bàn trang điểm">
+        </div>
+        <div class="split-info">
+          <h3>Thanh</h3>
+          <p>Đầm satin + kẹp tóc ngọc trai. Bộ đôi nhẹ nhàng cho tiệc cưới, sinh nhật và chụp ảnh.</p>
+          <div class="combo-price"><b>990.000 ₫</b><s style="color:var(--muted);font-size:13px">1.180.000 ₫</s><em>Tiết kiệm 190k</em></div>
+          <a class="btn btn-accent" href="#">Xem combo</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- PromoSplitBanner — mosaic lookbook: 1 poster lớn + 4 ô -->
+<section class="band">
+  <div class="wrap">
+    <div class="center-head">
+      <span class="eyebrow">Lookbook</span>
+      <h2>Một bộ đồ, nhiều khoảnh khắc</h2>
+      <p>Khi dạo bước, lúc ngồi lại hay trong một khung hình thân quen — tìm cảm hứng phối đồ theo cách của nàng.</p>
+    </div>
+    <div class="mosaic">
+      <a class="mos mos-big" href="#">
+        <img src="https://images.unsplash.com/photo-1751278402161-08f27318d389?w=1200&q=75&auto=format&fit=crop" alt="Người mẫu mặc đầm maxi trên bờ đá">
+        <div class="poster">
+          <h3>Nét đẹp <span>Mùa Thu</span></h3>
+          <div class="orn" aria-hidden="true">✿</div>
+          <p>Ưu đãi đến 40% bộ sưu tập mới</p>
+          <span class="btn btn-accent">Mua ngay</span>
+        </div>
+      </a>
+      <div class="mosaic-grid">
+        <a class="mos" href="#"><img src="https://images.unsplash.com/photo-1589400445193-c881a4b0b38a?w=600&q=75&auto=format&fit=crop" alt="Áo choàng màu yến mạch"><span class="mos-label">Áo khoác</span></a>
+        <a class="mos" href="#"><img src="https://images.unsplash.com/photo-1594019739447-6c8a1d744d61?w=600&q=75&auto=format&fit=crop" alt="Đầm đen hai dây"><span class="mos-label">Đầm tiệc</span></a>
+        <a class="mos" href="#"><img src="https://images.unsplash.com/photo-1610901157620-340856d0a50f?w=600&q=75&auto=format&fit=crop" alt="Áo len xám trên cầu gỗ"><span class="mos-label">Len mùa lạnh</span></a>
+        <a class="mos" href="#"><img src="https://images.unsplash.com/photo-1624687943971-e86af76d57de?w=600&q=75&auto=format&fit=crop" alt="Túi da nâu"><span class="mos-label">Túi &amp; phụ kiện</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bán chạy — rail 5 cột + nút mũi tên -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <h2>Bán chạy nhất</h2>
+      <div class="arrows">
+        <button aria-label="Trước" data-rail="-1">←</button>
+        <button aria-label="Sau" data-rail="1">→</button>
+      </div>
+    </div>
+    <div class="rail" data-cards="best"></div>
+  </div>
+</section>
+
+<!-- theme.BrandStory — hàng "hướng dẫn" có số thứ tự + viền đỏ trên -->
+<section class="band" style="background:var(--soft)">
+  <div class="wrap">
+    <div class="center-head">
+      <span class="eyebrow">Câu chuyện CLOTHES</span>
+      <h2>Từ xưởng may nhỏ đến tủ đồ của nàng</h2>
+    </div>
+    <div class="story-row">
+      <div class="story-media"><img src="https://images.unsplash.com/photo-1787505136265-9a99dad3bbac?w=1200&q=75&auto=format&fit=crop" alt="Thợ may cắt vải trắng trong xưởng"></div>
+      <div class="story-text">
+        <span class="eyebrow">01 / Chất liệu</span>
+        <h3>Chọn vải trước, rồi mới vẽ mẫu</h3>
+        <p>Mỗi thiết kế bắt đầu từ cuộn vải: lụa, linen, len merino được chọn theo độ rủ và độ bền sau 50 lần giặt.</p>
+        <div class="stats"><div><b>12</b><span>năm may đo</span></div><div><b>40k+</b><span>khách hàng</span></div></div>
+      </div>
+    </div>
+    <div class="story-row rev">
+      <div class="story-media"><img src="https://images.unsplash.com/photo-1787505136296-1e8f0750e5ff?w=1200&q=75&auto=format&fit=crop" alt="Thợ may chỉnh đầm trắng trên ma-nơ-canh"></div>
+      <div class="story-text">
+        <span class="eyebrow">02 / Phom dáng</span>
+        <h3>Thử trên dáng người Việt</h3>
+        <p>Bảng size đo lại trên 200 khách thật. Không vừa? Đổi size miễn phí trong 30 ngày.</p>
+        <a class="btn btn-accent" href="#" style="align-self:flex-start">Xem bảng chọn size</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <h2>Nàng nói gì</h2>
+      <p>Phản hồi từ những đơn hàng đã xác nhận mua.</p>
+    </div>
+    <div class="reviews">
+      <article class="review"><div class="stars">★★★★★</div><q>Vải dày dặn, đường may kỹ. Mặc đi làm cả ngày không nhăn, đồng nghiệp hỏi mua ở đâu.</q><footer><img src="https://images.unsplash.com/photo-1613915617430-8ab0fd7c6baf?w=120&q=70&auto=format&fit=crop" alt=""><div><b>Ngọc Anh · Hà Nội</b><span>Blazer camel · Size M · </span><span class="verified">✓ Đã mua</span></div></footer></article>
+      <article class="review"><div class="stars">★★★★★</div><q>Đầm lên dáng đẹp hơn ảnh. Shop tư vấn size rất kỹ, giao nhanh 2 ngày.</q><footer><img src="https://images.unsplash.com/photo-1594019739447-6c8a1d744d61?w=120&q=70&auto=format&fit=crop" alt=""><div><b>Thu Trang · TP.HCM</b><span>Đầm hai dây đen · Size S · </span><span class="verified">✓ Đã mua</span></div></footer></article>
+      <article class="review"><div class="stars">★★★★☆</div><q>Combo công sở rất tiện, phối sẵn khỏi nghĩ. Mong shop ra thêm màu be.</q><footer><img src="https://images.unsplash.com/photo-1592818628487-b273941a7849?w=120&q=70&auto=format&fit=crop" alt=""><div><b>Minh Châu · Đà Nẵng</b><span>Combo Duyên · Size M · </span><span class="verified">✓ Đã mua</span></div></footer></article>
+    </div>
+  </div>
+</section>
+
+<!-- Instagram (reference) — mới, cần link IG trong store settings -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="center-head">
+      <h2>CLOTHES trên Instagram</h2>
+      <p>Xem thêm những sắc áo, họa tiết và khoảnh khắc nàng diện CLOTHES.</p>
+    </div>
+    <div class="ig">
+      <a href="#"><img src="https://images.unsplash.com/photo-1646296142225-28436a93863a?w=400&q=70&auto=format&fit=crop" alt="Đầm midi trên phố"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1628973434123-3e956f203dd6?w=400&q=70&auto=format&fit=crop" alt="Lụa đỏ cận cảnh"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1706816997334-c51bcd0f52e0?w=400&q=70&auto=format&fit=crop" alt="Đầm dài cắt xéo"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1580478491436-fd6a937acc9e?w=400&q=70&auto=format&fit=crop" alt="Blazer đỏ trên bậc thang"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1601379327928-bedfaf9da2d0?w=400&q=70&auto=format&fit=crop" alt="Len cashmere cận cảnh"></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1676716105765-e19fe6a01851?w=400&q=70&auto=format&fit=crop" alt="Trench coat trên phố"></a>
+    </div>
+    <div class="more" style="margin-top:0"><a class="btn btn-accent" href="#">Ghé Instagram CLOTHES</a></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="logo" href="#">CLOTHES</a>
+        <p>Thời trang tối giản, phom chuẩn, giá minh bạch.<br>Hotline 096 868 0813 · hello@clothes.vn</p>
+      </div>
+      <div><h4>Mua sắm</h4><ul><li>Hàng mới</li><li>Đang khuyến mãi</li><li>Combo</li><li>Bộ sưu tập</li></ul></div>
+      <div><h4>Hỗ trợ</h4><ul><li>Chính sách đổi trả</li><li>Bảng chọn size</li><li>Vận chuyển</li><li>Tra cứu đơn hàng</li></ul></div>
+      <div>
+        <h4>Nhận ưu đãi sớm</h4>
+        <p style="margin:0">Giảm 10% cho đơn đầu tiên khi đăng ký.</p>
+        <form class="sub-form" onsubmit="return false"><label class="sr" for="em">Email</label><input id="em" type="email" placeholder="Email của nàng"><button>Đăng ký</button></form>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 CLOTHES</span><span>Facebook · Instagram · TikTok</span></div>
+  </div>
+</footer>
+
+<div class="switch" role="group" aria-label="Chọn hướng thiết kế">
+  <button data-set="a" aria-pressed="true"><i style="background:#BC0000"></i>A<span> · Son</span></button>
+  <button data-set="b" aria-pressed="false"><i style="background:#9E2032;box-shadow:0 0 0 3px #E8C27A"></i>B<span> · Lụa</span></button>
+  <button data-set="c" aria-pressed="false"><i style="background:#fff"></i>C<span> · Mực</span></button>
+</div>
+
+<script>
+// ponytail: mockup — card render từ mảng cho gọn file, không phải code thật
+const U = (id, w = 700) => `https://images.unsplash.com/photo-${id}?w=${w}&q=75&auto=format&fit=crop`;
+const P = [
+  ["1594019739447-6c8a1d744d61", "Đầm hai dây satin đen dáng suông", 399000, 829000, ["#151515", "#5A1A2A"]],
+  ["1613915617430-8ab0fd7c6baf", "Set blazer ống rộng xám than", 899000, 1290000, ["#3d3d3d", "#C9B79C"]],
+  ["1618037208874-021263b58d69", "Đầm lụa hai dây cổ đổ", 499000, 790000, ["#E8D9C5", "#9E2032"]],
+  ["1646296142225-28436a93863a", "Đầm midi tay lỡ phối nút ngực", 459000, 690000, ["#2F4B3A", "#E8D9C5"]],
+  ["1789110519607-6176d668fb72", "Đầm ôm body cổ vuông", 359000, 599000, ["#151515"]],
+  ["1747396206869-75ea57b325ce", "Đầm len gân dáng cột màu yến mạch", 549000, 790000, ["#D8CBB5", "#6E5A48"]],
+  ["1706816997334-c51bcd0f52e0", "Đầm dài cắt xéo lụa mờ", 689000, 990000, ["#B9A48E"]],
+  ["1637102146291-c408b298e22b", "Trench coat dáng dài màu đá", 1190000, 1490000, ["#C9B79C", "#151515"]],
+  ["1580478491436-fd6a937acc9e", "Blazer boxy đỏ son", 799000, 0, ["#B3263A", "#151515"]],
+  ["1676716105765-e19fe6a01851", "Trench coat thắt eo cổ điển", 1090000, 0, ["#B9A48E"]],
+];
+const vnd = (n) => n.toLocaleString("vi-VN") + " ₫";
+const card = ([id, name, price, old, sw], i, ranked) => `
+  <a class="card" href="#">
+    <div class="card-media">
+      <img src="${U(id)}" alt="${name}" loading="lazy">
+      ${ranked ? `<span class="rank">${String(i + 1).padStart(2, "0")}</span>`
+        : old ? `<span class="badge">Giảm ${Math.round((1 - price / old) * 100)}%</span>` : ""}
+      <button class="quick" type="button">Thêm vào giỏ</button>
+    </div>
+    <h3>${name}</h3>
+    <div class="swatches">${sw.map((c) => `<i style="background:${c}"></i>`).join("")}</div>
+    <div class="price"><b>${vnd(price)}</b>${old ? `<s>${vnd(old)}</s>` : ""}</div>
+  </a>`;
+document.querySelector('[data-cards="sale"]').innerHTML = P.filter((p) => p[3]).slice(0, 8).map((p, i) => card(p, i)).join("");
+document.querySelector('[data-cards="best"]').innerHTML = [...P.slice(4), ...P.slice(0, 4)].map((p, i) => card(p, i, true)).join("");
+
+const rail = document.querySelector(".rail");
+document.querySelectorAll("[data-rail]").forEach((b) =>
+  b.addEventListener("click", () => rail.scrollBy({ left: rail.clientWidth * b.dataset.rail, behavior: "smooth" })));
+
+// Đếm ngược flash sale
+const end = Date.now() + (12 * 3600 + 22 * 60 + 8) * 1000;
+const pad = (n) => String(n).padStart(2, "0");
+setInterval(() => {
+  const t = Math.max(0, Math.floor((end - Date.now()) / 1000));
+  document.querySelector("[data-h]").textContent = pad(Math.floor(t / 3600));
+  document.querySelector("[data-m]").textContent = pad(Math.floor((t % 3600) / 60));
+  document.querySelector("[data-s]").textContent = pad(t % 60);
+}, 1000);
+
+// Switcher hướng thiết kế (#a / #b / #c)
+const set = (k) => {
+  document.documentElement.dataset.theme = k;
+  document.querySelectorAll("[data-set]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.set === k));
+  history.replaceState(null, "", "#" + k);
+};
+document.querySelectorAll("[data-set]").forEach((b) => b.addEventListener("click", () => set(b.dataset.set)));
+if (/^#[abc]$/.test(location.hash)) set(location.hash.slice(1));
+</script>
+</body>
+</html>
